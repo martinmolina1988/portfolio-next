@@ -1,39 +1,31 @@
 import Stars from 'components/Stars'
 import { map } from 'lodash'
 import React from 'react'
-import { Card, Image } from 'semantic-ui-react'
+import { Card, Container, Image } from 'semantic-ui-react'
 import { API_URL } from 'utils/url'
-
+import style from './skill.module.css'
 export default function index (props) {
   const { data } = props
   return (
     <div>
       <h2
-        style={{
-          margin: '10px',
-          padding: '15px',
-          textAlign: 'center',
-          backgroundColor: 'rgba(0,0,0,0.5)'
-        }}
+        className={style.cardTitle}
       >
         Las siguientes herramientas son las que utilizo mas con mayor
         frecuencia:
       </h2>
-      <Card.Group style={{ margin: '10px' }}>
+      <Container className={style.center}>
+      <Card.Group style={{ justifyContent: 'center' }} >
         {map(data, (element, index) => (
-          <>
-            <Card
-              style={{
-                backgroundColor: 'rgba(0,0,0,0.5)',
-                boxShadow: '0 1px 3px 0 black'
-              }}
+            <Card key={index}
+            className={style.cardGroup}
             >
               <Image src={element.image.secure_url} alt="" wrapped ui={false} />
               <Card.Content>
-                <Card.Header style={{ color: 'white' }}>
+                <Card.Header >
                   {element.name}
                 </Card.Header>
-                <Card.Description style={{ color: 'white' }}>
+                <Card.Description >
                   {element.description}
                 </Card.Description>
               </Card.Content>
@@ -41,9 +33,9 @@ export default function index (props) {
                 <Stars value={element.value} />
               </Card.Content>
             </Card>
-          </>
         ))}
       </Card.Group>
+      </Container>
     </div>
   )
 }

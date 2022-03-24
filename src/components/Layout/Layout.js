@@ -19,9 +19,9 @@ export const Layout = ({ children }) => {
   }, [])
 
   return (
-      <SidebarExampleSidebar>
+      <SidebarExampleSidebar >
         <Navbar screenWidth={screenWidth} />
-        <Grid style={{ minHeight: '100vh', color: 'white' }}>
+        <Grid className={styles.gridContainer}>
           <Grid.Row>
             {screenWidth > 1000 && (
               <Grid.Column width={3}>

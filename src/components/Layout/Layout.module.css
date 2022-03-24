@@ -3,3 +3,11 @@
   background-size: cover;
   padding-bottom: 100px;
 }
+.gridContainer {
+  min-height: 100vh;
+  color: white;
+}
+
+.sidebar {
+  text-align: center;
+}

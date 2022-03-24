@@ -7,3 +7,8 @@
 .img:hover {
   width: 250px !important;
 }
+.project {
+  margin: 20px;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 20px;
+}

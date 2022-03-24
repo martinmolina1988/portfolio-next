@@ -1,24 +1,25 @@
 /* eslint-disable camelcase */
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import Error from 'next/error'
 import { API_URL } from 'utils/url'
 import Carousels from '../Carousels'
+import styles from './Project.module.css'
 const Project = ({ data, error }) => {
+  const [mount, setMount] = useState(false)
+  useEffect(() => {
+    setMount(true)
+  }, [])
+
   const { back_technologies, description, front_technologies, title, images } =
     data[0]
 
-  if (error && error.statusCode) { return <Error statusCode={error.statusCode} title={error.statusText} /> }
+  if (error && error.statusCode) {
+    return <Error statusCode={error.statusCode} title={error.statusText} />
+  }
 
   return (
     <>
-      <div
-        style={{
-          margin: '20px',
-          backgroundColor: 'rgba(0,0,0,0.5)',
-          padding: '20px'
-        }}
-        className="transparente animate__animated animate__fadeIn"
-      >
+      <div className={styles.project}>
         <p className="center">
           {' '}
           <strong> {title}</strong>
@@ -32,12 +33,15 @@ const Project = ({ data, error }) => {
         <p>
           <strong>Backend:</strong> {back_technologies}
         </p>
-        <div dangerouslySetInnerHTML={{ __html: description }} />
-      </div>
+        { mount &&
+          <div dangerouslySetInnerHTML={{ __html: description }} />
+      }</div>
 
       <div className="transparente animate__animated animate__fadeIn">
         <div className="galeria">
+{ mount &&
           <Carousels images={images} />
+       }
         </div>
       </div>
     </>

@@ -1,9 +1,14 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Grid } from 'semantic-ui-react'
 import Error from 'next/error'
 import { API_URL } from 'utils/url'
 
 const Project = ({ data, error }) => {
+  const [mount, setMount] = useState(false)
+  useEffect(() => {
+    setMount(true)
+  }, [])
+
   if (error && error.statusCode) { return <Error statusCode={error.statusCode} title={error.statusText} /> }
 
   return (
@@ -12,7 +17,7 @@ const Project = ({ data, error }) => {
       verticalAlign="middle"
       columns="1"
       style={{ height: '80vh' }}
-    >
+    >{ mount &&
       <Grid.Row>
         <Grid.Column textAlign="center">
           <div style={{ backgroundColor: 'rgba(0,0,0,0.7)', padding: '20px' }}>
@@ -21,7 +26,7 @@ const Project = ({ data, error }) => {
           </div>
         </Grid.Column>
       </Grid.Row>
-
+}
     </Grid>
   )
 }

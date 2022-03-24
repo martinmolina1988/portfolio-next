@@ -5,7 +5,7 @@ import isAdmin from 'pages/api/isadmin'
 import React, { useState, useEffect } from 'react'
 import { Button, Image } from 'semantic-ui-react'
 import { API_URL } from 'utils/url'
-
+import style from './Layout.module.css'
 export default function SidebarContent () {
   const { setVisible } = useTasks()
   const [data, setData] = useState({})
@@ -26,7 +26,7 @@ export default function SidebarContent () {
   }, [])
 
   return (
-    <div style={{ textAlign: 'center', color: 'white' }}>
+    <div className={ style.sidebar}>
       <Image
         circular
         src={data?.me}
@@ -63,7 +63,7 @@ export default function SidebarContent () {
       <h3>Experiencia laboral</h3>
       <ul style={{ listStyle: 'none' }}>
         {map(data.experiences, (experience, index) => (
-          <li>
+          <li key={experience._id}>
             <Link className="link" href={`/experience/${experience._id}`}>
               <h4>
                 <a onClick={() => setVisible(false)}> {experience.title}</a>
@@ -75,7 +75,7 @@ export default function SidebarContent () {
       <h3> Mis proyectos</h3>
       <ul style={{ listStyle: 'none' }}>
         {map(data.projects, (project, index) => (
-          <li>
+          <li key={index}>
             <Link className="link" href={`/projects/${project.title}`}>
               <h4>
                 <a onClick={() => setVisible(false)}> {project.title}</a>

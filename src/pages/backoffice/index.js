@@ -23,7 +23,7 @@ function Table ({ array, type }) {
       {type !== 'me'
         ? (
             map(array, (element, index) => (
-          <tr>
+          <tr key={type === 'projects' ? element.title : element._id}>
             <td>{element.title ? element.title : element.name}</td>
             <td>
               <Link
@@ -72,6 +72,7 @@ export default function BackOffice ({
     <div style={{ justifyContent: 'center' }}>
       <Accordion inverted>
         <Accordion.Title
+          key={0}
           active={activeIndex === 0}
           index={0}
           onClick={handleClick}
@@ -79,10 +80,11 @@ export default function BackOffice ({
           <Icon name="dropdown" />
           Experiences
         </Accordion.Title>
-        <Accordion.Content active={activeIndex === 0}>
-          <Table array={experiences} type={'experience'} />
+        <Accordion.Content key={0} active={activeIndex === 0}>
+          <Table key={0} array={experiences} type={'experience'} />
         </Accordion.Content>
         <Accordion.Title
+          key={1}
           active={activeIndex === 1}
           index={1}
           onClick={handleClick}
@@ -90,10 +92,11 @@ export default function BackOffice ({
           <Icon name="dropdown" />
           Skills
         </Accordion.Title>
-        <Accordion.Content active={activeIndex === 1}>
-          <Table array={skills} type={'skills'} />
+        <Accordion.Content key={1} active={activeIndex === 1}>
+          <Table key={1} array={skills} type={'skills'} />
         </Accordion.Content>
         <Accordion.Title
+          key={2}
           active={activeIndex === 2}
           index={2}
           onClick={handleClick}
@@ -101,10 +104,11 @@ export default function BackOffice ({
           <Icon name="dropdown" />
           Projects
         </Accordion.Title>
-        <Accordion.Content active={activeIndex === 2}>
-          <Table array={projects} type={'projects'} />
+        <Accordion.Content key={2} active={activeIndex === 2}>
+          <Table key={2} array={projects} type={'projects'} />
         </Accordion.Content>
         <Accordion.Title
+          key={3}
           active={activeIndex === 3}
           index={3}
           onClick={handleClick}
@@ -112,8 +116,8 @@ export default function BackOffice ({
           <Icon name="dropdown" />
           Perfil
         </Accordion.Title>
-        <Accordion.Content active={activeIndex === 3}>
-          <Table array={me} type={'me'} />
+        <Accordion.Content key={3} active={activeIndex === 3}>
+          <Table key={3} array={me} type={'me'} />
         </Accordion.Content>
       </Accordion>
     </div>

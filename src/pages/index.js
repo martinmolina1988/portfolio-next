@@ -1,7 +1,7 @@
 import react, { useEffect } from 'react'
 import { Container, Grid, GridColumn, GridRow } from 'semantic-ui-react'
 import { API_URL } from 'utils/url'
-
+import styles from './index.module.css'
 export default function Index ({ me }) {
   const fecha =
     (new Date() - new Date('1988-07-27')) / (1000 * 60 * 60 * 24 * 365.24)
@@ -22,13 +22,7 @@ export default function Index ({ me }) {
     <Container>
       <div className="sobremi" style={{ textAlign: 'center' }}>
         <div
-          style={{
-            margin: ' 10px 10px ',
-            backgroundColor: 'rgba(0,0,0,0.65)',
-            padding: '20px',
-            justifyContent: 'center'
-          }}
-          className=" transparente animate__animated animate__fadeIn"
+          className= {styles.transparente}
         >
           <h1>Sobre mí</h1>
           <p
@@ -41,14 +35,9 @@ export default function Index ({ me }) {
             {me.description}
           </p>
         </div>
-        <div className=" justify-content-center">
+        <div className={styles.transparente}>
           <Grid
-            style={{
-              backgroundColor: 'rgba(0,0,0,0.65)',
-              color: 'white',
-              margin: ' 0 10px ',
-              padding: '50px 10px'
-            }}
+
           >
             <GridRow className="transparente animate__animated animate__fadeIn">
               <GridColumn width={screenWidth > 700 ? 8 : 16}>

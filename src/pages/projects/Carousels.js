@@ -2,7 +2,7 @@ import { Carousel } from 'react-carousel-minimal'
 import { useEffect } from 'react'
 import { map } from 'lodash'
 import { Dimmer, Loader } from 'semantic-ui-react'
-
+import style from './Carousel.module.css'
 function Carousels ({ images }) {
   const data = [{}]
   const loadData = async () => {
@@ -59,12 +59,7 @@ function Carousels ({ images }) {
               slideImageFit="cover"
               thumbnails={true}
               thumbnailWidth="100px"
-              style={{
-                textAlign: 'center',
-                maxWidth: '850px',
-                maxHeight: '500px',
-                margin: '40px auto'
-              }}
+              className={style.carousel}
             />
           </div>
             )}
