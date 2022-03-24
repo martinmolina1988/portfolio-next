@@ -8,7 +8,7 @@ import { map } from 'lodash'
 import dynamic from 'next/dynamic'
 import 'react-quill/dist/quill.snow.css'
 import { getSession } from 'next-auth/react'
-import ImagesProjects from 'components/imagesProjects'
+import ImagesProjects from 'components/ImagesProjects'
 const ReactQuill = dynamic(() => import('react-quill'), { ssr: false })
 
 const NewTask = () => {

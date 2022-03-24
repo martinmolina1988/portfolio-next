@@ -1,7 +1,7 @@
 import { useTasks } from 'context/TasksContext'
 import { map } from 'lodash'
 import Link from 'next/link'
-import isAdmin from 'pages/api/isAdmin'
+import isAdmin from 'pages/api/isadmin'
 import React, { useState, useEffect } from 'react'
 import { Button, Image } from 'semantic-ui-react'
 import { API_URL } from 'utils/url'
