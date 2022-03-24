@@ -1,43 +1,40 @@
-/* eslint-disable @next/next/no-img-element */
-/* eslint-disable jsx-a11y/alt-text */
-import react, { useEffect } from "react";
-import { Container, Grid, GridColumn, GridRow } from "semantic-ui-react";
+import react, { useEffect } from 'react'
+import { Container, Grid, GridColumn, GridRow } from 'semantic-ui-react'
 
-export default function Index({ me }) {
+export default function Index ({ me }) {
   const fecha =
-    (new Date() - new Date("1988-07-27")) / (1000 * 60 * 60 * 24 * 365.24);
+    (new Date() - new Date('1988-07-27')) / (1000 * 60 * 60 * 24 * 365.24)
 
-  const [screenWidth, setScreenWidth] = react.useState(1000);
-  function onWidth() {
-    setScreenWidth(window.innerWidth);
+  const [screenWidth, setScreenWidth] = react.useState(1000)
+  function onWidth () {
+    setScreenWidth(window.innerWidth)
   }
   useEffect(() => {
-    if (typeof window !== "undefined") {
+    if (typeof window !== 'undefined') {
       // browser code
-      window.addEventListener("resize", onWidth);
+      window.addEventListener('resize', onWidth)
     }
-    setScreenWidth(window.innerWidth);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    setScreenWidth(window.innerWidth)
+  }, [])
 
   return (
     <Container>
-      <div className="sobremi" style={{ textAlign: "center" }}>
+      <div className="sobremi" style={{ textAlign: 'center' }}>
         <div
           style={{
-            margin: " 10px 10px ",
-            backgroundColor: "rgba(0,0,0,0.65)",
-            padding: "20px",
-            justifyContent: "center",
+            margin: ' 10px 10px ',
+            backgroundColor: 'rgba(0,0,0,0.65)',
+            padding: '20px',
+            justifyContent: 'center'
           }}
           className=" transparente animate__animated animate__fadeIn"
         >
           <h1>Sobre mí</h1>
           <p
             style={{
-              width: "70%",
-              margin: " 50px auto",
-              fontWeight: "bold",
+              width: '70%',
+              margin: ' 50px auto',
+              fontWeight: 'bold'
             }}
           >
             {me.description}
@@ -46,10 +43,10 @@ export default function Index({ me }) {
         <div className=" justify-content-center">
           <Grid
             style={{
-              backgroundColor: "rgba(0,0,0,0.65)",
-              color: "white",
-              margin: " 0 10px ",
-              padding: "50px 10px",
+              backgroundColor: 'rgba(0,0,0,0.65)',
+              color: 'white',
+              margin: ' 0 10px ',
+              padding: '50px 10px'
             }}
           >
             <GridRow className="transparente animate__animated animate__fadeIn">
@@ -99,17 +96,17 @@ export default function Index({ me }) {
         </div>
       </div>
     </Container>
-  );
+  )
 }
 
-export async function getServerSideProps() {
-  const res = await fetch("http://localhost:3000/api/me");
-  const data = await res.json();
-  const me = data[0];
+export async function getServerSideProps () {
+  const res = await fetch('http://localhost:3000/api/me')
+  const data = await res.json()
+  const me = data[0]
 
   return {
     props: {
-      me,
-    },
-  };
+      me
+    }
+  }
 }

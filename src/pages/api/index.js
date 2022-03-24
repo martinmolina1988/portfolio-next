@@ -1,3 +1,3 @@
-import { dbConnect } from "utils/mongoose"
+import { dbConnect } from 'utils/mongoose'
 
 dbConnect()

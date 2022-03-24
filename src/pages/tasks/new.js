@@ -1,111 +1,112 @@
-import { useState, useEffect } from "react";
-import { Button, Form, Grid, Loader } from "semantic-ui-react";
+import { useState, useEffect } from 'react'
+import { Button, Form, Grid, Loader } from 'semantic-ui-react'
 
-import { useRouter } from "next/router";
-import { API_URL } from "utils/url";
+import { useRouter } from 'next/router'
+import { API_URL } from 'utils/url'
 
 const NewTask = () => {
   const [newTask, setNewTask] = useState({
-    title: "",
-    description: "",
-  });
-  const { query, push } = useRouter();
+    title: '',
+    description: ''
+  })
+  const { query, push } = useRouter()
 
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [errors, setErrors] = useState({});
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [errors, setErrors] = useState({})
 
   const getTask = async () => {
-    const res = await fetch(`${API_URL}/api/tasks/` + query.id);
-    const data = await res.json();
-    setNewTask({ title: data.title, description: data.description });
-  };
+    const res = await fetch(`${API_URL}/api/tasks/` + query.id)
+    const data = await res.json()
+    setNewTask({ title: data.title, description: data.description })
+  }
 
   useEffect(() => {
-    if (query.id) getTask();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    if (query.id) getTask()
+  }, [])
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    let errs = validate();
+    e.preventDefault()
+    const errs = validate()
 
-    if (Object.keys(errs).length) return setErrors(errs);
+    if (Object.keys(errs).length) return setErrors(errs)
 
-    setIsSubmitting(true);
+    setIsSubmitting(true)
 
     if (query.id) {
-      await updateTask();
+      await updateTask()
     } else {
-      await createTask();
+      await createTask()
     }
 
-    await push("/");
-  };
+    await push('/')
+  }
 
   const handleChange = (e) =>
-    setNewTask({ ...newTask, [e.target.name]: e.target.value });
+    setNewTask({ ...newTask, [e.target.name]: e.target.value })
 
   const validate = () => {
-    let errors = {};
+    const errors = {}
 
     if (!newTask.title) {
-      errors.title = "Title is required";
+      errors.title = 'Title is required'
     }
     if (!newTask.description) {
-      errors.description = "Description is required";
+      errors.description = 'Description is required'
     }
 
-    return errors;
-  };
+    return errors
+  }
 
   const createTask = async () => {
     try {
       await fetch(`${API_URL}/api/tasks`, {
-        method: "POST",
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json'
         },
-        body: JSON.stringify(newTask),
-      });
+        body: JSON.stringify(newTask)
+      })
     } catch (error) {
-      console.error(error);
+      console.error(error)
     }
-  };
+  }
 
   const updateTask = async () => {
     try {
       await fetch(`${API_URL}/api/tasks/` + query.id, {
-        method: "PUT",
+        method: 'PUT',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json'
         },
-        body: JSON.stringify(newTask),
-      });
+        body: JSON.stringify(newTask)
+      })
     } catch (error) {
-      console.error(error);
+      console.error(error)
     }
-  };
+  }
 
   return (
     <Grid
       centered
       verticalAlign="middle"
       columns="3"
-      style={{ height: "80vh" }}
+      style={{ height: '80vh' }}
     >
       <Grid.Row>
         <Grid.Column textAlign="center">
           <div className="form-container">
-            <h1>{!query.id ? "Create Task" : "Update task"}</h1>
+            <h1>{!query.id ? 'Create Task' : 'Update task'}</h1>
             <div>
-              {isSubmitting ? (
+              {isSubmitting
+                ? (
                 <Loader active inline="centered" />
-              ) : (
+                  )
+                : (
                 <Form onSubmit={handleSubmit}>
                   <Form.Input
                     error={
                       errors.title
-                        ? { content: "Please enter a title", pointing: "below" }
+                        ? { content: 'Please enter a title', pointing: 'below' }
                         : null
                     }
                     label="Title"
@@ -119,8 +120,8 @@ const NewTask = () => {
                     error={
                       errors.description
                         ? {
-                            content: "Please enter a Description",
-                            pointing: "below",
+                            content: 'Please enter a Description',
+                            pointing: 'below'
                           }
                         : null
                     }
@@ -131,16 +132,16 @@ const NewTask = () => {
                     value={newTask.description}
                   />
                   <Button type="submit" primary>
-                    {query.id ? "Update" : "Save"}
+                    {query.id ? 'Update' : 'Save'}
                   </Button>
                 </Form>
-              )}
+                  )}
             </div>
           </div>
         </Grid.Column>
       </Grid.Row>
     </Grid>
-  );
-};
+  )
+}
 
-export default NewTask;
+export default NewTask

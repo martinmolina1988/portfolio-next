@@ -1,46 +1,45 @@
-import Task from "models/Task";
+import Task from 'models/Task'
 
-import { dbConnect } from "utils/mongoose";
-dbConnect();
+import { dbConnect } from 'utils/mongoose'
+dbConnect()
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default async (req, res) => {
   const {
     method,
     query: { id },
-    body,
-  } = req;
+    body
+  } = req
 
   switch (method) {
-    case "GET":
+    case 'GET':
       try {
-        const task = await Task.findById(id);
-        if (!task) return res.status(404).json({ msg: "Task does not exists" });
-        return res.status(200).json(task);
+        const task = await Task.findById(id)
+        if (!task) return res.status(404).json({ msg: 'Task does not exists' })
+        return res.status(200).json(task)
       } catch (error) {
-        return res.status(400).json({ msg: error.message });
+        return res.status(400).json({ msg: error.message })
       }
-    case "PUT":
+    case 'PUT':
       try {
         const task = await Task.findByIdAndUpdate(id, body, {
           new: true,
-          runValidators: true,
-        });
-        if (!task) return res.status(404).json({ msg: "Task does not exists" });
-        return res.status(200).json(task);
+          runValidators: true
+        })
+        if (!task) return res.status(404).json({ msg: 'Task does not exists' })
+        return res.status(200).json(task)
       } catch (error) {
-        return res.status(400).json({ msg: error.message });
+        return res.status(400).json({ msg: error.message })
       }
-    case "DELETE":
+    case 'DELETE':
       try {
-        const deletedTask = await Task.findByIdAndDelete(id);
-        if (!deletedTask)
-          return res.status(404).json({ msg: "Task does not exists" });
-        return res.status(204).json();
+        const deletedTask = await Task.findByIdAndDelete(id)
+        if (!deletedTask) { return res.status(404).json({ msg: 'Task does not exists' }) }
+        return res.status(204).json()
       } catch (error) {
-        return res.status(400).json({ msg: error.message });
+        return res.status(400).json({ msg: error.message })
       }
     default:
-      return res.status(400).json({ msg: "This method is not supported" });
+      return res.status(400).json({ msg: 'This method is not supported' })
   }
-};
+}

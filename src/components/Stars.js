@@ -1,17 +1,17 @@
-import React from "react";
-import { Icon } from "semantic-ui-react";
+import React from 'react'
+import { Icon } from 'semantic-ui-react'
 
-export default function Stars({ value }) {
+export default function Stars ({ value }) {
   switch (value) {
     case 1:
-      return <Icon color="yellow" name="star" />;
+      return <Icon color="yellow" name="star" />
     case 2:
       return (
         <>
           <Icon color="yellow" name="star" />
           <Icon color="yellow" name="star" />
         </>
-      );
+      )
     case 3:
       return (
         <>
@@ -19,7 +19,7 @@ export default function Stars({ value }) {
           <Icon color="yellow" name="star" />
           <Icon color="yellow" name="star" />
         </>
-      );
+      )
     case 4:
       return (
         <>
@@ -28,7 +28,7 @@ export default function Stars({ value }) {
           <Icon color="yellow" name="star" />
           <Icon color="yellow" name="star" />
         </>
-      );
+      )
     case 5:
       return (
         <>
@@ -38,9 +38,9 @@ export default function Stars({ value }) {
           <Icon color="yellow" name="star" />
           <Icon color="yellow" name="star" />
         </>
-      );
+      )
 
     default:
-      break;
+      break
   }
 }

@@ -1,4 +1,4 @@
 
-import taskFormPage from "../new";
+import taskFormPage from '../new'
 
-export default taskFormPage;
+export default taskFormPage

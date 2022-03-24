@@ -1,44 +1,43 @@
-import React, { useState } from "react";
-import { useRouter } from "next/router";
-import { Confirm, Button, Loader, Grid } from "semantic-ui-react";
-import Error from "next/error";
-import { API_URL } from "utils/url";
+import React, { useState } from 'react'
+import { useRouter } from 'next/router'
+import { Confirm, Button, Grid } from 'semantic-ui-react'
+import Error from 'next/error'
+import { API_URL } from 'utils/url'
 
 const Project = ({ task, error }) => {
-  const [confirm, setConfirm] = useState(false);
-  const [isDeleting, setIsDeleting] = useState(false);
-  const { query, push } = useRouter();
+  const [confirm, setConfirm] = useState(false)
+  const [isDeleting, setIsDeleting] = useState(false)
+  const { query, push } = useRouter()
 
   const deleteProject = async () => {
-    const { id } = query;
+    const { id } = query
     try {
       await fetch(`${API_URL}/api/tasks/${id}`, {
-        method: "DELETE",
-      });
+        method: 'DELETE'
+      })
     } catch (error) {
-      console.error(error);
+      console.error(error)
     }
-  };
+  }
 
-  const open = () => setConfirm(true);
-  const close = () => setConfirm(false);
+  const open = () => setConfirm(true)
+  const close = () => setConfirm(false)
 
   const handleDelete = async () => {
-    setIsDeleting(true);
-    await deleteProject();
-    push("/");
-    close();
-  };
+    setIsDeleting(true)
+    await deleteProject()
+    push('/')
+    close()
+  }
 
-  if (error && error.statusCode)
-    return <Error statusCode={error.statusCode} title={error.statusText} />;
+  if (error && error.statusCode) { return <Error statusCode={error.statusCode} title={error.statusText} /> }
 
   return (
     <Grid
       centered
       verticalAlign="middle"
       columns="1"
-      style={{ height: "80vh" }}
+      style={{ height: '80vh' }}
     >
       <Grid.Row>
         <Grid.Column textAlign="center">
@@ -61,30 +60,30 @@ const Project = ({ task, error }) => {
         onCancel={close}
       />
     </Grid>
-  );
-};
+  )
+}
 
-export async function getServerSideProps({ query: { id } }) {
-  const res = await fetch(`${API_URL}/api/projects/${id}`);
+export async function getServerSideProps ({ query: { id } }) {
+  const res = await fetch(`${API_URL}/api/projects/${id}`)
 
   if (res.status === 200) {
-    const task = await res.json();
+    const task = await res.json()
 
     return {
       props: {
-        task,
-      },
-    };
+        task
+      }
+    }
   }
 
   return {
     props: {
       error: {
         statusCode: res.status,
-        statusText: "Invalid Id",
-      },
-    },
-  };
+        statusText: 'Invalid Id'
+      }
+    }
+  }
 }
 
-export default Project;
+export default Project
