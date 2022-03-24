@@ -30,6 +30,7 @@ const NewExperience = () => {
       title: data.title,
       description: data.description
     })
+    setValue(data.description)
   }
 
   useEffect(() => {
@@ -102,7 +103,7 @@ const NewExperience = () => {
 
   const handleDescription = async (e) => {
     setValue(e)
-    setNewData({ ...newData, description: value })
+    setNewData({ ...newData, description: e })
   }
 
   return (

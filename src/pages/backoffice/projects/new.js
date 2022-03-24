@@ -82,7 +82,10 @@ const NewTask = () => {
   const handleChange = (e) => {
     setNewProject({ ...newProject, [e.target.name]: e.target.value })
   }
-
+  const handleDescription = async (e) => {
+    setValue(e)
+    setNewProject({ ...newProject, description: e })
+  }
   const validate = () => {
     const err = {}
     map(newProject, (element, index) => {
@@ -121,10 +124,7 @@ const NewTask = () => {
       console.error(error)
     }
   }
-  const handleDescription = async (e) => {
-    setValue(e)
-    setNewProject({ ...newProject, description: value })
-  }
+
   return (
     <div
       className="form-container"
@@ -159,8 +159,8 @@ const NewTask = () => {
                   <>
                     <p style={{ fontWeight: 'bold' }}>{index}</p>
                     <ReactQuill
+                    value={value}
                       name={index}
-                      value={element}
                       onChange={(e) => handleDescription(e)}
                       modules={{
                         toolbar: {
@@ -182,7 +182,7 @@ const NewTask = () => {
                     )
                   )
             )}
-            {images !== undefined && (
+            {images !== undefined && query.id && (
               <ImagesProjects
                 reload={reload}
                 setReload={setReload}
