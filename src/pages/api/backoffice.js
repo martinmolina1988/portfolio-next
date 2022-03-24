@@ -2,6 +2,8 @@ import Experience from 'models/Experience'
 import Project from 'models/Project'
 import Me from 'models/Me'
 import Skill from 'models/Skill'
+import { dbConnect } from 'utils/mongoose'
+dbConnect()
 export default async function handler (req, res) {
   try {
     const experiences = await Experience.find().select('title')

@@ -1,4 +1,6 @@
 import Project from 'models/Project'
+import { dbConnect } from 'utils/mongoose'
+dbConnect()
 export default async function handler (req, res) {
   const { body } = req
 
