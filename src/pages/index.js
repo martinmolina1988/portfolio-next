@@ -1,5 +1,6 @@
 import react, { useEffect } from 'react'
 import { Container, Grid, GridColumn, GridRow } from 'semantic-ui-react'
+import { API_URL } from 'utils/url'
 
 export default function Index ({ me }) {
   const fecha =
@@ -100,7 +101,7 @@ export default function Index ({ me }) {
 }
 
 export async function getServerSideProps () {
-  const res = await fetch('http://localhost:3000/api/me')
+  const res = await fetch(`${API_URL}/api/me`)
   const data = await res.json()
   const me = data[0]
 
