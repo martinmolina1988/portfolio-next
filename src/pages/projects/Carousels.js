@@ -1,6 +1,5 @@
 import { Carousel } from 'react-carousel-minimal'
 import { useEffect, useState } from 'react'
-// import { map } from 'lodash'
 import { Dimmer, Loader } from 'semantic-ui-react'
 import style from './Carousel.module.css'
 function Carousels ({ images }) {
