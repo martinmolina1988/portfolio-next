@@ -55,8 +55,8 @@ function Carousels ({ images }) {
               dots={true}
               pauseIconColor="white"
               pauseIconSize="40px"
-              slideBackgroundColor="darkgrey"
-              slideImageFit="cover"
+              slideBackgroundColor="transparent"
+              slideImageFit="contain"
               thumbnails={true}
               thumbnailWidth="100px"
               className={style.carousel}

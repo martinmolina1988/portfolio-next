@@ -4,3 +4,6 @@
   max-height: 500px;
   margin: 40px auto;
 }
+.carousel-image {
+  object-fit: contain;
+}
