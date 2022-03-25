@@ -33,16 +33,11 @@ const Project = ({ data, error }) => {
         <p>
           <strong>Backend:</strong> {back_technologies}
         </p>
-        { mount &&
-          <div dangerouslySetInnerHTML={{ __html: description }} />
-      }</div>
+        {mount && <div dangerouslySetInnerHTML={{ __html: description }} />}
+      </div>
 
       <div className="transparente animate__animated animate__fadeIn">
-        <div className="galeria">
-{ mount &&
-          <Carousels images={images} />
-       }
-        </div>
+        <div className={styles.galeria}>{mount && <Carousels images={images} />}</div>
       </div>
     </>
   )
