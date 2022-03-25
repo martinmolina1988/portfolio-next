@@ -1,18 +1,27 @@
 import { Carousel } from 'react-carousel-minimal'
-import { useEffect } from 'react'
-import { map } from 'lodash'
+import { useEffect, useState } from 'react'
+// import { map } from 'lodash'
 import { Dimmer, Loader } from 'semantic-ui-react'
 import style from './Carousel.module.css'
 function Carousels ({ images }) {
-  const data = [{}]
+  const [mount, setMount] = useState(false)
+  const [data, setData] = useState([{}])
   const loadData = async () => {
-    await map(images, (image, index) =>
-      data.push({
-        image: image.secure_url,
-        caption: index + 1
-      })
+    const res = await images.map((image, index) => {
+      if (image.secure_url !== undefined) {
+        const obj = {
+          image: image.secure_url,
+          caption: index + 1
+        }
+        return obj
+      }
+      return {}
+    }
     )
-    data.shift()
+
+    setData(res)
+
+    setMount(true)
   }
   useEffect(() => {
     loadData()
@@ -25,11 +34,13 @@ function Carousels ({ images }) {
     fontSize: '20px',
     fontWeight: 'bold'
   }
+  if (Object.keys(data[0]).length === 0) { data.shift() }
   return (
     <div style={{ margin: '40px 0' }}>
       <div style={{ textAlign: 'center' }}>
         <h2>Algunas imagenes del proyecto</h2>
-        {Object.keys(data).length === 0
+        {
+        !mount
           ? (
           <Dimmer active>
             <Loader />
