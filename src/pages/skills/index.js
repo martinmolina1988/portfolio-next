@@ -22,10 +22,10 @@ export default function index (props) {
             >
               <Image src={element.image.secure_url} alt="" wrapped ui={false} />
               <Card.Content>
-                <Card.Header >
+                <Card.Header style={{ color: 'white' }} >
                   {element.name}
                 </Card.Header>
-                <Card.Description >
+                <Card.Description style={{ color: 'white' }}>
                   {element.description}
                 </Card.Description>
               </Card.Content>
